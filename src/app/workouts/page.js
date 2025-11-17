@@ -19,7 +19,13 @@ export default async function Page() {
             <h2>
               {workout.class} #{workout.episode_no}
             </h2>
-            <Image src={workout.img_url} alt="" height={200} width={300} />
+            <Image
+              src={workout.img_url}
+              alt=""
+              height={200}
+              width={300}
+              className="h-auto"
+            />
           </Link>
         ))}
       </div>

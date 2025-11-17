@@ -48,30 +48,32 @@ export default async function Page({ params }) {
   }
 
   //fetch data for profile
-  const userInfo = (
-    await db.query(`SELECT * FROM user_accounts WHERE id = $1`, [id])
-  ).rows[0];
+  if (id !== placeholderId) {
+    const userInfo = (
+      await db.query(`SELECT * FROM user_accounts WHERE id = $1`, [id])
+    ).rows[0];
 
-  if (!userInfo) {
+    if (!userInfo) {
+      return (
+        <div>
+          <p>User not found</p>
+          <p>Add an error.js here that redirects users to own profile</p>
+        </div>
+      );
+    }
+
+    //check if viewing own profile
+    const isOwnProfile = loggedInUser.id === userInfo.id;
+
     return (
       <div>
-        <p>User not found</p>
-        <p>Add an error.js here that redirects users to own profile</p>
+        <h2>User profile</h2>
+        <p>Username:</p>
+        <p>{userInfo.username}</p>
+        <p>About {userInfo.username}:</p>
+        <p>{userInfo.bio}</p>
+        {isOwnProfile && <Link href="/users/edit">Edit</Link>}
       </div>
     );
   }
-
-  //check if viewing own profile
-  const isOwnProfile = loggedInUser.id === userInfo.id;
-
-  return (
-    <div>
-      <h2>User profile</h2>
-      <p>Username:</p>
-      <p>{userInfo.username}</p>
-      <p>About {userInfo.username}:</p>
-      <p>{userInfo.bio}</p>
-      {isOwnProfile && <Link href="/users/edit">Edit</Link>}
-    </div>
-  );
 }

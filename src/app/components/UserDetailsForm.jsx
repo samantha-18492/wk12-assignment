@@ -1,6 +1,6 @@
 import { db } from "@/utils/utilities";
 import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 
 export default async function UserDetailsForm({ defaultValues }) {
   const { userId } = await auth();
@@ -20,11 +20,15 @@ export default async function UserDetailsForm({ defaultValues }) {
         `UPDATE user_accounts SET username = $1, bio = $2 WHERE clerk_id = $3`,
         [data.username, data.bio, userId]
       );
+
+      redirect(`/users/${previousInfo.id}`);
     } else {
-      await db.query(
-        `INSERT INTO user_accounts (username, bio, clerk_id) VALUES ($1, $2, $3)`,
+      const result = await db.query(
+        `INSERT INTO user_accounts (username, bio, clerk_id) VALUES ($1, $2, $3) RETURNING id`,
         [data.username, data.bio, userId]
       );
+
+      redirect(`/users/${result.rows[0].id}`);
     }
   }
 

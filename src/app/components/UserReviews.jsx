@@ -1,7 +1,7 @@
 import { db } from "@/utils/utilities";
 import Link from "next/link";
 import DeleteButton from "./DeleteButton";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 
 export default async function UserReviews({ userId, isOwnProfile }) {
   const reviews = (

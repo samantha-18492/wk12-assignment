@@ -3,6 +3,7 @@ import { db } from "@/utils/utilities";
 import UserDetailsForm from "@/app/components/UserDetailsForm";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import UserReviews from "@/app/components/UserReviews";
 
 export default async function Page({ params }) {
   const { id } = await params;
@@ -66,14 +67,20 @@ export default async function Page({ params }) {
     const isOwnProfile = loggedInUser.id === userInfo.id;
 
     return (
-      <div>
-        <h2>User profile</h2>
-        <p>Username:</p>
-        <p>{userInfo.username}</p>
-        <p>About {userInfo.username}:</p>
-        <p>{userInfo.bio}</p>
-        {isOwnProfile && <Link href="/users/edit">Edit</Link>}
-      </div>
+      <>
+        <div>
+          <h2>User profile</h2>
+          <p>Username:</p>
+          <p>{userInfo.username}</p>
+          <p>About {userInfo.username}:</p>
+          <p>{userInfo.bio}</p>
+          {isOwnProfile && <Link href="/users/edit">Edit</Link>}
+        </div>
+        <div>
+          <h2>Reviews left by {userInfo.username}</h2>
+          <UserReviews userId={userInfo.id} />
+        </div>
+      </>
     );
   }
 }

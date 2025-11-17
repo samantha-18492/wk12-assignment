@@ -1,5 +1,6 @@
 import WorkoutDetails from "@/app/components/WorkoutDetails";
 import { db } from "@/utils/utilities";
+import Link from "next/link";
 
 export default async function Page({ params }) {
   const { id } = await params;
@@ -11,11 +12,36 @@ export default async function Page({ params }) {
     )
   ).rows[0];
 
-  console.log(workout);
+  const reviews = (
+    await db.query(
+      `SELECT workout_reviews.*, user_accounts.username, user_accounts.clerk_id FROM workout_reviews JOIN user_accounts ON user_accounts.id = workout_reviews.user_id WHERE workout_reviews.workout_id = $1`,
+      [id]
+    )
+  ).rows;
 
   return (
-    <div>
-      <WorkoutDetails workout={workout} />
-    </div>
+    <>
+      <section>
+        <WorkoutDetails workout={workout} />
+      </section>
+      <section>
+        <h2>What&apos;s this workout like?</h2>
+        {reviews.length === 0 ? (
+          <div>
+            <p>
+              This workout hasn&apos;t been reviewed yet. Share your thoughts
+              using the form below.
+            </p>
+          </div>
+        ) : (
+          reviews.map((review) => (
+            <div key={review.id}>
+              <p>&quot;{review.content}&quot;</p>
+              <Link href={`/users/${review.user_id}`}>{review.user_id}</Link>
+            </div>
+          ))
+        )}
+      </section>
+    </>
   );
 }

@@ -1,9 +1,16 @@
 import WorkoutDetails from "@/app/components/WorkoutDetails";
 import { db } from "@/utils/utilities";
+import { auth } from "@clerk/nextjs/server";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 
 export default async function Page({ params }) {
   const { id } = await params;
+  const { isAuthenticated, redirectToSignIn, userId } = await auth();
+
+  if (isAuthenticated == false) {
+    redirectToSignIn();
+  }
 
   const workout = (
     await db.query(
@@ -12,12 +19,36 @@ export default async function Page({ params }) {
     )
   ).rows[0];
 
+  if (!workout) {
+    notFound();
+  }
+
   const reviews = (
     await db.query(
       `SELECT workout_reviews.*, user_accounts.username, user_accounts.clerk_id FROM workout_reviews JOIN user_accounts ON user_accounts.id = workout_reviews.user_id WHERE workout_reviews.workout_id = $1`,
       [id]
     )
   ).rows;
+
+  async function handleSubmit(formData) {
+    "use server";
+
+    const content = formData.get("content");
+
+    const res = await db.query(
+      `SELECT id FROM user_accounts WHERE clerk_id = $1`,
+      [userId]
+    );
+
+    const currentUserId = res.rows[0].id;
+
+    await db.query(
+      `INSERT INTO workout_reviews (user_id, workout_id, content) VALUES ($1, $2, $3)`,
+      [currentUserId, id, content]
+    );
+
+    redirect(`/workouts/${id}`);
+  }
 
   return (
     <>
@@ -37,10 +68,20 @@ export default async function Page({ params }) {
           reviews.map((review) => (
             <div key={review.id}>
               <p>&quot;{review.content}&quot;</p>
-              <Link href={`/users/${review.user_id}`}>{review.user_id}</Link>
+              <Link href={`/users/${review.user_id}`}>{review.username}</Link>
             </div>
           ))
         )}
+      </section>
+      <section>
+        <form action={handleSubmit}>
+          <h2>
+            Share your experience of {workout.class} #{workout.episode_no}
+          </h2>
+          <p>Your contribution helps...</p>
+          <textarea name="content" placeholder="Try to include" required />
+          <button type="submit">Submit</button>
+        </form>
       </section>
     </>
   );

@@ -78,7 +78,7 @@ export default async function Page({ params }) {
         </div>
         <div>
           <h2>Reviews left by {userInfo.username}</h2>
-          <UserReviews userId={userInfo.id} />
+          <UserReviews userId={userInfo.id} isOwnProfile={isOwnProfile} />
         </div>
       </>
     );

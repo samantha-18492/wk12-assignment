@@ -1,7 +1,9 @@
 import { db } from "@/utils/utilities";
 import Link from "next/link";
+import DeleteButton from "./DeleteButton";
+import { redirect } from "next/dist/server/api-utils";
 
-export default async function UserReviews({ userId }) {
+export default async function UserReviews({ userId, isOwnProfile }) {
   const reviews = (
     await db.query(
       `SELECT workout_reviews.id AS review_id, workout_reviews.content, workouts.class, workouts.episode_no, workouts.id AS workout_id FROM workout_reviews JOIN workouts ON workouts.id = workout_reviews.workout_id WHERE workout_reviews.user_id = $1`,
@@ -17,6 +19,13 @@ export default async function UserReviews({ userId }) {
     );
   }
 
+  async function handleDelete(reviewId) {
+    "use server";
+    await db.query(`DELETE FROM workout_reviews WHERE id =$1`, [reviewId]);
+
+    redirect(`/users/${userId}`);
+  }
+
   return (
     <div>
       {reviews.map((review) => (
@@ -28,6 +37,12 @@ export default async function UserReviews({ userId }) {
             </Link>
           </p>
           <p>&apos;{review.content}&apos;</p>
+          {isOwnProfile && (
+            <DeleteButton
+              reviewId={review.review_id}
+              handleDelete={handleDelete}
+            />
+          )}
         </div>
       ))}
     </div>

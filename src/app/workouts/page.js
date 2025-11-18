@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Filtering from "../components/Filtering";
 import { FaClock } from "react-icons/fa6";
+import { teko } from "../layout";
 
 export default async function Page({ searchParams }) {
   const { isAuthenticated, redirectToSignIn } = await auth();
@@ -51,7 +52,13 @@ export default async function Page({ searchParams }) {
 
   return (
     <section className="flex flex-col items-center text-center">
-      <p>Choose a workout</p>
+      <h2 className={`${teko.className} text-2xl uppercase`}>
+        Your workout, your way
+      </h2>
+      <p className="my-2 w-100">
+        Filter by exercise type and body considerations to find Les Mills
+        workouts that suit your needs.
+      </p>
       <Filtering allTypes={allTypes} allTags={allTags} />
       <div className="flex flex-wrap gap-3 mt-2 max-w-sm justify-center md:max-w-3xl">
         {workouts.length > 0 ? (

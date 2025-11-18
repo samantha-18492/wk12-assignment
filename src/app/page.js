@@ -5,7 +5,9 @@ import Image from "next/image";
 export default function Home() {
   return (
     <section className="mt-5 flex flex-col items-center text-center">
-      <h2 className="mb-5 uppercase">Workouts that work for you</h2>
+      <h2 className={`${teko.className} text-2xl mb-10 uppercase`}>
+        Workouts that work for you
+      </h2>
       <div className="relative">
         <Image
           src="https://lmimirroralphapvr.azureedge.net/static/media/33408/86af3982-911c-42c6-8bb6-b0ba4a0ea18a/hero_cozycardio_1_960x540.jpg"

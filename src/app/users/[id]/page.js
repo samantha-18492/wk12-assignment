@@ -4,6 +4,7 @@ import UserDetailsForm from "@/app/components/UserDetailsForm";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import UserReviews from "@/app/components/UserReviews";
+import { UserButton } from "@clerk/nextjs";
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -95,6 +96,7 @@ export default async function Page({ params }) {
           <p>About {userInfo.username}:</p>
           <p>{userInfo.bio}</p>
           {isOwnProfile && <Link href="/users/edit">Edit</Link>}
+          {isOwnProfile && <UserButton />}
         </div>
         <div>
           <h2>Reviews left by {userInfo.username}</h2>

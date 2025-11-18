@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { SignedIn, UserButton } from "@clerk/nextjs";
+import { SignedIn } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { db } from "@/utils/utilities";
+import { MdAccountCircle } from "react-icons/md";
 
 export default async function Header() {
   const { userId } = await auth();
@@ -28,11 +29,10 @@ export default async function Header() {
             <Link href="/workouts">Workouts</Link>
           </SignedIn>
           <Link href="/about-us">About</Link>
-        </div>
-        <div>
           <SignedIn>
-            <Link href={userProfileLink}>Profile</Link>
-            <UserButton />
+            <Link href={userProfileLink}>
+              <MdAccountCircle />
+            </Link>
           </SignedIn>
         </div>
       </nav>

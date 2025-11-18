@@ -64,7 +64,7 @@ export default async function Page({ searchParams }) {
                 alt=""
                 height={200}
                 width={300}
-                className="h-auto"
+                className="w-full h-auto"
               />
             </Link>
           ))

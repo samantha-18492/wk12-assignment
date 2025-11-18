@@ -51,13 +51,13 @@ export default async function Page({ searchParams }) {
   }
 
   return (
-    <section className="flex flex-col items-center text-center">
+    <section className="flex flex-col items-center text-center ">
       <h2 className={`${teko.className} text-2xl uppercase`}>
         Your workout, your way
       </h2>
-      <p className="my-2 w-100">
-        Filter by exercise type and body considerations to find Les Mills
-        workouts that suit your needs.
+      <p className="my-2 w-100 md:w-3xl">
+        Explore by exercise type and suitability to find Les Mills workouts that
+        match your needs.
       </p>
       <Filtering allTypes={allTypes} allTags={allTags} />
       <div className="flex flex-wrap gap-3 mt-2 max-w-sm justify-center md:max-w-3xl">

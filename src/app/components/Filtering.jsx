@@ -14,9 +14,9 @@ export default function Filtering({ allTags, allTypes }) {
   }
 
   return (
-    <div>
-      <form>
-        <p>Filter by:</p>
+    <div className="flex mt-4 border-2 p-1 border-flexmills-grey md:w-180">
+      <form className="text-sm">
+        <p className="justify-self-start font-bold mb-2">Filter by:</p>
         <label>
           Type:
           <select
@@ -34,7 +34,7 @@ export default function Filtering({ allTags, allTypes }) {
           </select>
         </label>
         <label className="ml-4">
-          Tag:
+          Suitability:
           <select
             name="tag"
             value={currentTag}

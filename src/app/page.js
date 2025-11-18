@@ -25,7 +25,7 @@ export default function Home() {
           />
         </div>
       </div>
-      <h3 className="my-5 w-80">
+      <h3 className="my-5 w-80 md:w-180">
         Your guide to Les Mills workouts that work with your body and help you
         thrive
       </h3>

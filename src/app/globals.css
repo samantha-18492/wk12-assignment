@@ -10,6 +10,10 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --flexmills-green: #00ff63;
+  --flexmills-grey: #b6b6b6;
+  --flexmills-dark-grey: #212121;
+  --flexmills-black: #100e09;
 }
 
 @media (prefers-color-scheme: dark) {

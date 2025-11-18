@@ -51,7 +51,7 @@ export default async function Page({ searchParams }) {
   }
 
   return (
-    <section className="flex flex-col items-center text-center ">
+    <section className="flex flex-col items-center text-center">
       <h2 className={`${teko.className} text-2xl uppercase`}>
         Your workout, your way
       </h2>
@@ -80,7 +80,7 @@ export default async function Page({ searchParams }) {
                   {workout.class} #{workout.episode_no}
                 </h2>
                 <p className="flex gap-2 text-sm text-flexmills-grey py-1.5 md:text-xl">
-                  <FaClock className="mt-0.5" />
+                  <FaClock className="mt-0.5" aria-hidden />
                   {workout.duration} mins
                 </p>
                 <p className="text-sm text-flexmills-grey border px-1.5 py-0.5 md:text-xl">

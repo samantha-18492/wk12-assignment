@@ -4,6 +4,19 @@ import { auth } from "@clerk/nextjs/server";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+
+  const workout = (
+    await db.query(`SELECT class, episode_no FROM workouts WHERE id = $1`, [id])
+  ).rows[0];
+
+  return {
+    title: `${workout.class} #${workout.episode_no} | Flex Mills`,
+    description: `Learn more about ${workout.class} #${workout.episode_no} on Flex Mills.`,
+  };
+}
+
 export default async function Page({ params }) {
   const { id } = await params;
   const { isAuthenticated, redirectToSignIn, userId } = await auth();

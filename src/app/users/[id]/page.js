@@ -5,6 +5,26 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import UserReviews from "@/app/components/UserReviews";
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+
+  const user = (
+    await db.query(`SELECT username FROM user_accounts WHERE id = $1`, [id])
+  ).rows[0];
+
+  if (!user) {
+    return {
+      title: "User not found",
+      description: "This user does not exist on Flex Mills.",
+    };
+  }
+
+  return {
+    title: `${user.username}'s Profile | Flex Mills`,
+    description: `Explore ${user.username}'s activity and workout reviews on Flex Mills.`,
+  };
+}
+
 export default async function Page({ params }) {
   const { id } = await params;
 

@@ -1,4 +1,10 @@
-import { Geist, Geist_Mono, Teko, Racing_Sans_One } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Teko,
+  Racing_Sans_One,
+  Nunito_Sans,
+} from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import Header from "./components/Header";
@@ -9,6 +15,11 @@ export const teko = Teko({
 
 export const racingSansOne = Racing_Sans_One({
   weight: "400",
+  subsets: ["latin"],
+});
+
+export const nunitoSans = Nunito_Sans({
+  weight: "500",
   subsets: ["latin"],
 });
 
@@ -32,11 +43,9 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+        <body className={`${nunitoSans.className} antialiased mb-5`}>
           <Header />
-          {children}
+          <div className="flex justify-center min-h-screen">{children}</div>
         </body>
       </html>
     </ClerkProvider>

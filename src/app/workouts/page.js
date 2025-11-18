@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import Image from "next/image";
 import Filtering from "../components/Filtering";
+import { FaClock } from "react-icons/fa6";
 
 export default async function Page({ searchParams }) {
   const { isAuthenticated, redirectToSignIn } = await auth();
@@ -49,29 +50,42 @@ export default async function Page({ searchParams }) {
   }
 
   return (
-    <div className="flex flex-col items-center text-center">
+    <section className="flex flex-col items-center text-center">
       <p>Choose a workout</p>
       <Filtering allTypes={allTypes} allTags={allTags} />
-      <div className="flex flex-wrap gap-5 mt-12 max-w-sm justify-center md:max-w-3xl">
+      <div className="flex flex-wrap gap-3 mt-2 max-w-sm justify-center md:max-w-3xl">
         {workouts.length > 0 ? (
           workouts.map((workout) => (
-            <Link href={`/workouts/${workout.id}`} key={workout.id}>
-              <h2>
-                {workout.class} #{workout.episode_no}
-              </h2>
+            <Link
+              href={`/workouts/${workout.id}`}
+              key={workout.id}
+              className="bg-flexmills-black p-3 flex flex-row text-white w-90 md:w-180 md:p-6 hover:border-4 border-flexmills-green"
+            >
               <Image
                 src={workout.img_url}
                 alt=""
                 height={200}
                 width={300}
-                className="w-full h-auto"
+                className="w-40 h-auto md:w-80"
               />
+              <div className="flex flex-col items-start ml-2 justify-center md:text-2xl md:ml-6">
+                <h2 className="uppercase">
+                  {workout.class} #{workout.episode_no}
+                </h2>
+                <p className="flex gap-2 text-sm text-flexmills-grey py-1.5 md:text-xl">
+                  <FaClock className="mt-0.5" />
+                  {workout.duration} mins
+                </p>
+                <p className="text-sm text-flexmills-grey border px-1.5 py-0.5 md:text-xl">
+                  {workout.type}
+                </p>
+              </div>
             </Link>
           ))
         ) : (
           <p>No workouts match your filters</p>
         )}
       </div>
-    </div>
+    </section>
   );
 }

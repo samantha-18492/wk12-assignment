@@ -16,9 +16,15 @@ export default function Filtering({ allTags, allTypes }) {
   return (
     <div>
       <form>
+        <p>Filter by:</p>
         <label>
           Type:
-          <select name="type" value={currentType} onChange={handleChange}>
+          <select
+            name="type"
+            value={currentType}
+            onChange={handleChange}
+            className="border border-flexmills-black ml-2"
+          >
             <option value="">All</option>
             {allTypes.map((type) => (
               <option key={type} value={type}>
@@ -27,9 +33,14 @@ export default function Filtering({ allTags, allTypes }) {
             ))}
           </select>
         </label>
-        <label>
+        <label className="ml-4">
           Tag:
-          <select name="tag" value={currentTag} onChange={handleChange}>
+          <select
+            name="tag"
+            value={currentTag}
+            onChange={handleChange}
+            className="border border-flexmills-black ml-2"
+          >
             <option value="">All</option>
             {allTags.map((tag) => (
               <option key={tag.id} value={tag.tag_name}>

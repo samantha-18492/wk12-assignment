@@ -45,7 +45,9 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className={`${nunitoSans.className} antialiased mb-5`}>
           <Header />
-          <div className="flex justify-center min-h-screen">{children}</div>
+          <div className="flex justify-center min-h-screen mt-5">
+            {children}
+          </div>
         </body>
       </html>
     </ClerkProvider>

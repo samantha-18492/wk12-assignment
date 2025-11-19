@@ -66,7 +66,7 @@ export default async function Page({ searchParams }) {
             <Link
               href={`/workouts/${workout.id}`}
               key={workout.id}
-              className="bg-flexmills-black p-3 flex flex-row text-white w-90 md:w-180 md:p-6 hover:border-4 border-flexmills-green"
+              className="bg-flexmills-black p-3 flex flex-row text-white w-90 md:w-180 md:p-6 border-4 border-flexmills-black hover:border-flexmills-green"
             >
               <Image
                 src={workout.img_url}

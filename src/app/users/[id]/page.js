@@ -121,11 +121,13 @@ export default async function Page({ params }) {
               {isOwnProfile && <UserButton />}
             </div>
           </div>
-          <div className="p-2 bg-white border-2 border-flexmills-black mt-2">
-            <p className="font-bold">Username:</p>
-            <p>{userInfo.username}</p>
-            <p className="font-bold">About {userInfo.username}:</p>
-            <p>{userInfo.bio}</p>
+          <div className="p-2 bg-flexmills-black text-white mt-2">
+            <p className={`${teko.className} uppercase text-xl`}>Username:</p>
+            <p className="text-sm">{userInfo.username}</p>
+            <p className={`${teko.className} uppercase text-xl mt-2`}>
+              About {userInfo.username}:
+            </p>
+            <p className="text-sm">{userInfo.bio}</p>
           </div>
         </section>
         <section className="mt-4 bg-flexmills-grey p-2">

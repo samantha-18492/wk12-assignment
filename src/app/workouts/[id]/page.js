@@ -3,6 +3,7 @@ import { db } from "@/utils/utilities";
 import { auth } from "@clerk/nextjs/server";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
+import { teko } from "@/app/layout";
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -64,36 +65,72 @@ export default async function Page({ params }) {
   }
 
   return (
-    <section className="flex-col items-center w-90 md:w-5xl">
+    <div className="flex-col items-center mt-4 w-100 md:w-5xl">
       <WorkoutDetails workout={workout} />
-      <section>
-        <h2>What&apos;s this workout like?</h2>
+      <section className="bg-flexmills-grey mt-5">
+        <h2 className={`${teko.className} text-xl uppercase pt-2 px-2`}>
+          What&apos;s {workout.class} #{workout.episode_no} like?
+        </h2>
+        <p className="text-sm px-2">
+          Learn from others&apos; experiences to see if this workout is right
+          for you.
+        </p>
         {reviews.length === 0 ? (
-          <div>
-            <p>
-              This workout hasn&apos;t been reviewed yet. Share your thoughts
-              using the form below.
+          <div className="p-2 mt-2">
+            <p className="bg-white p-2 text-sm border-2 border-flexmills-dark-grey">
+              This workout hasn&apos;t been reviewed yet. Take the first rep and
+              share your experience with the community using the form below.
             </p>
           </div>
         ) : (
           reviews.map((review) => (
-            <div key={review.id}>
-              <p>&quot;{review.content}&quot;</p>
-              <Link href={`/users/${review.user_id}`}>{review.username}</Link>
+            <div key={review.id} className="p-2 mt-2">
+              <p className="bg-flexmills-black p-2 text-white text-sm">
+                &quot;{review.content}&quot; <br />
+                <Link
+                  href={`/users/${review.user_id}`}
+                  className="underline underline-offset-2 decoration-flexmills-green italic"
+                >
+                  {review.username}
+                </Link>
+              </p>
             </div>
           ))
         )}
       </section>
-      <section>
-        <form action={handleSubmit}>
-          <h2>
+      <section className="bg-flexmills-grey mt-5">
+        <form action={handleSubmit} className="flex flex-col">
+          <h2 className={`${teko.className} text-xl uppercase pt-2 px-2`}>
             Share your experience of {workout.class} #{workout.episode_no}
           </h2>
-          <p>Your contribution helps...</p>
-          <textarea name="content" placeholder="Try to include" required />
-          <button type="submit">Submit</button>
+          <p className="text-sm px-2">
+            Let the community know how this workout was for you. Your review
+            will be visible with your profile so others can learn from your
+            experience.
+          </p>
+          <textarea
+            name="content"
+            placeholder="Tell us what you enjoyed, what you adapted, and how the workout was for you"
+            required
+            rows="10"
+            className="bg-white p-2 text-sm mt-2 mx-2 placeholder-flexmills-black border-2 border-flexmills-dark-grey"
+          />
+          <button
+            type="submit"
+            className={`${teko.className} self-center bg-flexmills-black text-white uppercase text-xl w-40 px-5 pt-2 pb-1 border-3 my-4 border-flexmills-green hover:scale-110`}
+          >
+            Submit
+          </button>
         </form>
       </section>
-    </section>
+      <div className="flex justify-end">
+        <Link
+          href="/workouts"
+          className={`${teko.className} uppercase text-xl bg-flexmills-green mt-4 pt-2 pb-1 px-4 border-2 border-flexmills-green hover:border-flexmills-dark-grey`}
+        >
+          Back
+        </Link>
+      </div>
+    </div>
   );
 }

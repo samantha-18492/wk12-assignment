@@ -14,7 +14,9 @@ export default async function UserReviews({ userId, isOwnProfile }) {
   if (reviews.length === 0) {
     return (
       <div>
-        <p>This person hasn&apos;t shared any reviews yet.</p>
+        <p className="bg-white p-2 text-sm border-2 border-flexmills-dark-grey">
+          This person hasn&apos;t shared any reviews yet.
+        </p>
       </div>
     );
   }
@@ -27,22 +29,29 @@ export default async function UserReviews({ userId, isOwnProfile }) {
   }
 
   return (
-    <div>
+    <div className="mt-2">
       {reviews.map((review) => (
-        <div key={review.review_id}>
-          <p>
-            Posted about:{" "}
-            <Link href={`/workouts/${review.workout_id}`}>
-              {review.class} #{review.episode_no}
-            </Link>
-          </p>
-          <p>&apos;{review.content}&apos;</p>
-          {isOwnProfile && (
-            <DeleteButton
-              reviewId={review.review_id}
-              handleDelete={handleDelete}
-            />
-          )}
+        <div
+          key={review.review_id}
+          className="bg-flexmills-black p-2 text-white text-sm mb-3"
+        >
+          <p>&quot;{review.content}&quot;</p>
+          <div className="flex items-center justify-between">
+            <p className="italic">
+              Posted on:{" "}
+              <span className="underline underline-offset-2 decoration-flexmills-green">
+                <Link href={`/workouts/${review.workout_id}`}>
+                  {review.class} #{review.episode_no}
+                </Link>
+              </span>
+            </p>
+            {isOwnProfile && (
+              <DeleteButton
+                reviewId={review.review_id}
+                handleDelete={handleDelete}
+              />
+            )}
+          </div>
         </div>
       ))}
     </div>

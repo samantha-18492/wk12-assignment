@@ -5,6 +5,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import UserReviews from "@/app/components/UserReviews";
 import { UserButton } from "@clerk/nextjs";
+import { teko } from "@/app/layout";
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -88,21 +89,35 @@ export default async function Page({ params }) {
     const isOwnProfile = loggedInUser.id === userInfo.id;
 
     return (
-      <>
-        <div>
-          <h2>User profile</h2>
-          <p>Username:</p>
-          <p>{userInfo.username}</p>
+      <div className="flex flex-col w-100 md:w-5xl">
+        <section className="bg-flexmills-grey p-2">
+          <div className="flex items-center justify-between">
+            <h2 className={`${teko.className} text-2xl uppercase`}>
+              User profile
+            </h2>
+            <div className="flex items-center gap-4">
+              {isOwnProfile && (
+                <Link
+                  href="/users/edit"
+                  className={`${teko.className} bg-flexmills-black text-white uppercase text-xl px-5 pt-1 border-3 border-flexmills-green hover:scale-110`}
+                >
+                  Edit
+                </Link>
+              )}
+              {isOwnProfile && <UserButton />}
+            </div>
+          </div>
+          <p>Username: {userInfo.username}</p>
           <p>About {userInfo.username}:</p>
           <p>{userInfo.bio}</p>
-          {isOwnProfile && <Link href="/users/edit">Edit</Link>}
-          {isOwnProfile && <UserButton />}
-        </div>
-        <div>
-          <h2>Reviews left by {userInfo.username}</h2>
+        </section>
+        <section className="mt-4 bg-flexmills-grey p-2">
+          <h2 className={`${teko.className} text-2xl uppercase`}>
+            Reviews by {userInfo.username}{" "}
+          </h2>
           <UserReviews userId={userInfo.id} isOwnProfile={isOwnProfile} />
-        </div>
-      </>
+        </section>
+      </div>
     );
   }
 }

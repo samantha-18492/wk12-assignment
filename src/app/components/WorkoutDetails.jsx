@@ -13,7 +13,7 @@ export default function WorkoutDetails({ workout }) {
         className="h-auto w-full"
       />
       <div className="md:ml-4">
-        <h2 className="mt-4 text-xl  uppercase">
+        <h2 className="mt-2 text-xl  uppercase">
           {workout.class} #{workout.episode_no}
         </h2>
         <div className="flex items-center gap-4 mt-2">

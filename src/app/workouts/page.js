@@ -60,6 +60,9 @@ export default async function Page({ searchParams }) {
         match your needs.
       </p>
       <Filtering allTypes={allTypes} allTags={allTags} />
+      <p aria-live="polite" className="sr-only">
+        {workouts.length} workouts found.
+      </p>
       <div className="flex flex-wrap gap-3 mt-2 max-w-sm justify-center md:max-w-3xl">
         {workouts.length > 0 ? (
           workouts.map((workout) => (

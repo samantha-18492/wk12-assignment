@@ -1,6 +1,7 @@
 import { db } from "@/utils/utilities";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { teko } from "../layout";
 
 export default async function UserDetailsForm({ defaultValues }) {
   const { userId } = await auth();
@@ -33,22 +34,34 @@ export default async function UserDetailsForm({ defaultValues }) {
   }
 
   return (
-    <form action={handleSubmit}>
-      <label>Username:</label>
+    <form
+      action={handleSubmit}
+      className="flex flex-col bg-flexmills-grey p-2 mt-6 justify-center items-start"
+    >
+      <label className={`${teko.className} uppercase text-xl`}>Username:</label>
       <input
         name="username"
-        placeholder="Enter your preferred username"
+        placeholder="Enter a preferred username"
         defaultValue={defaultValues?.username ?? ""}
         required
+        className="bg-white border-2 border-flexmills-black p-2 w-90 placeholder-flexmills-black text-sm"
       />
-      <label>Tell us about yourself:</label>
+      <label className={`${teko.className} uppercase text-xl mt-2`}>
+        About you:
+      </label>
       <textarea
         name="bio"
-        placeholder="Share a little about your background and what kind of mobility issues you're struggling with"
+        placeholder="Tell us what workouts you enjoy, a bit about your fitness journey, and any mobility considerations."
         defaultValue={defaultValues?.bio ?? ""}
         required
+        rows="10"
+        className="bg-white border-2 border-flexmills-black p-2 w-90 placeholder-flexmills-black text-sm"
       />
-      <button>Save</button>
+      <button
+        className={`${teko.className} self-center bg-flexmills-black text-white uppercase text-xl w-40 px-5 pt-2 pb-1 border-3 my-4 border-flexmills-green hover:scale-110`}
+      >
+        Save
+      </button>
     </form>
   );
 }

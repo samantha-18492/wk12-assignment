@@ -10,6 +10,13 @@ import { teko } from "@/app/layout";
 export async function generateMetadata({ params }) {
   const { id } = await params;
 
+  if (id === "new") {
+    return {
+      title: "Complete Your Profile | Flex Mills",
+      description: "Finish setting up your Flex Mills account.",
+    };
+  }
+
   const user = (
     await db.query(`SELECT username FROM user_accounts WHERE id = $1`, [id])
   ).rows[0];
@@ -52,15 +59,16 @@ export default async function Page({ params }) {
   if (!loggedInUser) {
     if (id === placeholderId) {
       return (
-        <div>
+        <div className="text-center mt-4 w-100 md:w-5xl flex flex-col items-center">
           <p>
-            Before you start exploring, please take a moment to complete your
-            profile using the form below. It helps personalise your experience
-            and connect your insights to your account.
+            Before you dive in, please complete your profile using the form
+            below. It helps tailor your experience and lets the community
+            understand the perspective behind your reviews and insights.
           </p>
+          <br />
           <p>
-            Please note other users will be able to see your profile information
-            so do not share anything you dont want to be seen by others.
+            Your profile will be visible to other users, so only include
+            information you&apos;re comfortable sharing.
           </p>
           <UserDetailsForm />
         </div>
@@ -78,10 +86,16 @@ export default async function Page({ params }) {
 
     if (!userInfo) {
       return (
-        <div>
-          <p>User not found</p>
-          <p>Add an error.js here that redirects users to own profile</p>
-        </div>
+        <section className="text-center">
+          <h2 className={`${teko.className} text-2xl uppercase`}>Oops!</h2>
+          <p className="my-2">We couldn&apos;t find that user.</p>
+          <Link
+            href="/"
+            className={`${teko.className} bg-flexmills-green text-xl uppercase px-5 pt-3 pb-2 mt-4 inline-block hover:border-2 hover:border-flexmills-black`}
+          >
+            Return home
+          </Link>
+        </section>
       );
     }
 
@@ -89,7 +103,7 @@ export default async function Page({ params }) {
     const isOwnProfile = loggedInUser.id === userInfo.id;
 
     return (
-      <div className="flex flex-col w-100 md:w-5xl">
+      <div className="flex flex-col w-100 md:w-5xl mt-2">
         <section className="bg-flexmills-grey p-2">
           <div className="flex items-center justify-between">
             <h2 className={`${teko.className} text-2xl uppercase`}>
@@ -107,9 +121,12 @@ export default async function Page({ params }) {
               {isOwnProfile && <UserButton />}
             </div>
           </div>
-          <p>Username: {userInfo.username}</p>
-          <p>About {userInfo.username}:</p>
-          <p>{userInfo.bio}</p>
+          <div className="p-2 bg-white border-2 border-flexmills-black mt-2">
+            <p className="font-bold">Username:</p>
+            <p>{userInfo.username}</p>
+            <p className="font-bold">About {userInfo.username}:</p>
+            <p>{userInfo.bio}</p>
+          </div>
         </section>
         <section className="mt-4 bg-flexmills-grey p-2">
           <h2 className={`${teko.className} text-2xl uppercase`}>

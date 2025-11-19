@@ -18,10 +18,10 @@ export default function Home() {
         />
         <div className="absolute inset-0 flex items-center justify-center gap-4">
           <SignUpButton
-            className={`${teko.className} bg-flexmills-black text-white uppercase text-xl px-5 pt-2 pb-1 border-3 border-flexmills-green hover:scale-110`}
+            className={`${teko.className} bg-flexmills-black text-white uppercase text-xl px-5 pt-2 pb-1 border-3 border-flexmills-green hover:scale-110 md:text-3xl`}
           />
           <SignInButton
-            className={`${teko.className} bg-flexmills-black text-white uppercase text-xl px-5 pt-2 pb-1 border-3 border-flexmills-green hover:scale-110`}
+            className={`${teko.className} bg-flexmills-black text-white uppercase text-xl px-5 pt-2 pb-1 border-3 border-flexmills-green hover:scale-110 md:text-3xl`}
           />
         </div>
       </div>

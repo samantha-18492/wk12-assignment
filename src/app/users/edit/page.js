@@ -15,10 +15,12 @@ export default async function Page() {
   ).rows[0];
 
   return (
-    <div>
-      <h2>
-        You&apos;re editing your profile. Update your details below and click
-        Save to make your changes live.
+    <div className="text-center mt-4 w-100 md:w-5xl flex flex-col items-center">
+      <h2 className="text-center">
+        You&apos;re editing your profile.
+        <br />
+        Update your details below and click{" "}
+        <span className="font-bold">Save</span> to make your changes live.
       </h2>
       <UserDetailsForm defaultValues={user} />
     </div>

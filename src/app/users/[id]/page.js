@@ -118,7 +118,6 @@ export default async function Page({ params }) {
                   Edit
                 </Link>
               )}
-              {isOwnProfile && <UserButton />}
             </div>
           </div>
           <div className="p-2 bg-flexmills-black text-white mt-2">
@@ -136,6 +135,20 @@ export default async function Page({ params }) {
           </h2>
           <UserReviews userId={userInfo.id} isOwnProfile={isOwnProfile} />
         </section>
+        {isOwnProfile && (
+          <section className="mt-4 bg-flexmills-grey">
+            <div className="pt-2 px-2 flex justify-between">
+              <h2 className={`${teko.className} text-2xl uppercase`}>
+                Your clerk account
+              </h2>
+              <UserButton aria-label="Manage your Clerk account" />
+            </div>
+            <p className="text-sm pb-2 px-2">
+              You can manage your Clerk account and sign out using the button
+              provided.
+            </p>
+          </section>
+        )}
       </div>
     );
   }

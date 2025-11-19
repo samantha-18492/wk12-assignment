@@ -141,7 +141,7 @@ export default async function Page({ params }) {
               <h2 className={`${teko.className} text-2xl uppercase`}>
                 Your clerk account
               </h2>
-              <UserButton aria-label="Manage your Clerk account" />
+              <UserButton />
             </div>
             <p className="text-sm pb-2 px-2">
               You can manage your Clerk account and sign out using the button

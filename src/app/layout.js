@@ -1,10 +1,4 @@
-import {
-  Geist,
-  Geist_Mono,
-  Teko,
-  Racing_Sans_One,
-  Nunito_Sans,
-} from "next/font/google";
+import { Teko, Racing_Sans_One, Nunito_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import Header from "./components/Header";
@@ -20,16 +14,6 @@ export const racingSansOne = Racing_Sans_One({
 
 export const nunitoSans = Nunito_Sans({
   weight: "500",
-  subsets: ["latin"],
-});
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 

@@ -4,7 +4,7 @@ import { teko } from "@/app/layout";
 export default function notFound() {
   return (
     <section className="text-center">
-      <h2 className={`${teko.className} text-2xl uppercase`}>rest day</h2>
+      <h2 className={`${teko.className} text-2xl uppercase`}>Rest day</h2>
       <p className="my-2">We couldn&apos;t find that workout.</p>
       <p className="my-2">Check back soon or browse our existing workouts.</p>
       <Link

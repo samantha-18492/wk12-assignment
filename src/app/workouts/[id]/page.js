@@ -64,10 +64,8 @@ export default async function Page({ params }) {
   }
 
   return (
-    <>
-      <section>
-        <WorkoutDetails workout={workout} />
-      </section>
+    <section className="flex-col items-center w-90 md:w-5xl">
+      <WorkoutDetails workout={workout} />
       <section>
         <h2>What&apos;s this workout like?</h2>
         {reviews.length === 0 ? (
@@ -96,6 +94,6 @@ export default async function Page({ params }) {
           <button type="submit">Submit</button>
         </form>
       </section>
-    </>
+    </section>
   );
 }

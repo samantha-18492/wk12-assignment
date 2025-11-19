@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## **Flex Mills**
 
-## Getting Started
+Flex Mills is a personalised Les Mills workout discovery platform designed to help users find suitable sessions based on their movement needs, symptoms and preferences. Users can browse workouts, filter by type and suitability, read community reviews, and contribute their own experience to support others.
 
-First, run the development server:
+The platform is built with Next.js (App Router), Tailwind CSS and Clerk for authentication and user management. Data is stored in a a Postgres database, and the UI is enhanced with accessible components using Radix UI, React Icons and Tailwind animations.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## **Features**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Workout Discovery
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- Browse all Les Mills workouts available in the app
+- Filter workouts by exercise type (e.g. cardio, strength, flexibility)
+- Filter workouts by suitability (e.g. hip-friendly, low-impact, knee-friendly)
+- View detailed workout information including duration, type, suitability, and heavily featured movements
+- Access the full workout via a direct link to the corresponding Les Mills video
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Community Insights
 
-## Learn More
+- Read reviews from users with different capabilities
+- View user profiles to understand their workout journey
+- Leave your own review for any workout
 
-To learn more about Next.js, take a look at the following resources:
+User Profiles
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Create a Flex Mills profile with username and bio
+- View other users' profiles and their posted reviews
+- Edit your profile at any time
+- Manage authentication and security through Clerk
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## **Setup Instructions**
 
-## Deploy on Vercel
+1. Fork the repository (check "copy the main branch only") and clone your fork to your local machine
+2. Run npm install
+3. Create a .env file in the root directory and add the following environment variables:
+   - DB_CONN = the URL of your Postgres database
+   - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY = the API public key provided by Clerk
+   - CLERK_SECRET_KEY = the API secret key provided by Clerk
+   - NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL = /workouts
+   - NEXT_PUBLIC_CLERK_SIGN_UP_FORCE_REDIRECT_URL = /users/new
+4. Run npm run dev to start the development server
+5. Open http://localhost:3000 with your browser to see the site
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## **Potential future features**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Favouriting workouts so user can save sessions they love
+- User-created playlists e.g. "Bad Hip Day" or "Low-Impact Favourites"
+- Upvoting and downvoting of community reviews to surface the most helpful insights
+- Light / dark mode for improved accessibility and user preference
+- Toast notifications for actions such as saving a workout, submitting a review, or deleting content

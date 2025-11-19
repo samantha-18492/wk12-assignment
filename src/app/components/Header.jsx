@@ -24,7 +24,11 @@ export default async function Header() {
   return (
     <header className="w-full bg-flexmills-dark-grey h-20 flex items-center justify-between px-5 text-white">
       <div>
-        <Link href="/" className={`text-3xl ${racingSansOne.className}`}>
+        <Link
+          href="/"
+          aria-label="Flex Mills"
+          className={`text-3xl ${racingSansOne.className}`}
+        >
           Flex Mills
         </Link>
       </div>

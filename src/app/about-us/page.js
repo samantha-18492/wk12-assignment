@@ -23,25 +23,31 @@ export default function Page() {
         Explore member profiles, understand what they&apos;re managing day to
         day, and uncover sessions that could support your body in a similar way.
       </p>
-      <Accordion.Root type="single" collapsible className="my-2">
-        <Accordion.Item value="item-1">
-          <Accordion.Trigger
-            className={`${teko.className} text-2xl bg-flexmills-black text-flexmills-grey uppercase  px-5 pt-2 pb-1 border-3 border-flexmills-green hover:text-white`}
-          >
-            A Word from Our Founder
-          </Accordion.Trigger>
-          <Accordion.Content className="italic mt-4">
-            &quot;Flex Mills was born out of my own experience of managing
-            hypermobility. Some days my body feels strong, other days it needs
-            more care, and choosing workouts that felt safe and genuinely doable
-            was a constant challenge. I built Flex Mills to offer the clarity
-            and community I always wished I had - a space where we can learn
-            from each other and move with confidence.&quot;
-            <br />
-            <span className="not-italic">Samantha Parkes</span>
-          </Accordion.Content>
-        </Accordion.Item>
-      </Accordion.Root>
+      <div className="relative inline-block mt-5">
+        <Accordion.Root type="single" collapsible>
+          <Accordion.Item value="item-1">
+            <Accordion.Trigger
+              className={`${teko.className} text-2xl bg-flexmills-black text-white uppercase  px-5 pt-2 pb-1 border-3 border-flexmills-grey relative hover:border-flexmills-green`}
+            >
+              A Word from Our Founder
+              <span className="absolute -top-2 -right-2 inline-flex size-5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-flexmills-green opacity-75"></span>
+                <span className="relative inline-flex size-5 rounded-full bg-flexmills-green"></span>
+              </span>
+            </Accordion.Trigger>
+            <Accordion.Content className="italic mt-4">
+              &quot;Flex Mills was born out of my own experience of managing
+              hypermobility. Some days my body feels strong, other days it needs
+              more care, and choosing workouts that felt safe and genuinely
+              doable was a constant challenge. I built Flex Mills to offer the
+              clarity and community I always wished I had - a space where we can
+              learn from each other and move with confidence.&quot;
+              <br />
+              <span className="not-italic">Samantha Parkes</span>
+            </Accordion.Content>
+          </Accordion.Item>
+        </Accordion.Root>
+      </div>
     </section>
   );
 }
